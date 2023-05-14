@@ -10,8 +10,8 @@ server:
 spring:
   mvc:
     view:
-      prefix: /WEB-INF/views/
-      suffix: .jsp
+      prefix: /WEB-INF/views/ # .jsp 파일을 읽기 위해서는 해당 폴더가 필요하다.
+      suffix: .jsp # .jsp 를 suffix 로 달게 되면 페이지 리턴시에 index.jsp 에서 index만 리턴해도 된다.
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
