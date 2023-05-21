@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; ISO-8859-1" pageEncoding="UTF-8" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../layout/header.jsp" %>
 <div class="container">
-    <form action="/action_page.php">
+    <form>
         <div class="form-group">
             <%--라벨 사용시 for 와 id 가 같아야함! --%>
             <label for="username">UserName</label>
@@ -16,9 +17,10 @@
                 <input class="form-check-input" type="checkbox"> Remember me
             </label>
         </div>
-        <button type="submit" class="btn btn-primary">로그인</button>
     </form>
+    <button id="btn-login" class="btn btn-primary">로그인</button>
 </div>
+<script src="<c:url value="/js/user.js"/>"></script>
 <%@ include file="../layout/footer.jsp" %>
 
 

@@ -7,8 +7,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<%--    추가되는 js 라이브러리의 경우는 여기에다가 추가--%>
-<%--    slim 이 추가되어있는 경우 제이쿼리 사용 불가능--%>
+    <%--    추가되는 js 라이브러리의 경우는 여기에다가 추가--%>
+    <%--    slim 이 추가되어있는 경우 제이쿼리 사용 불가능--%>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -22,14 +22,31 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/user/loginForm"/>">로그인</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/user/joinForm"/>">회원가입</a>
-            </li>
-        </ul>
+        <c:choose>
+            <c:when test="${empty sessionScope.principal}">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/user/loginForm"/>">로그인</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/user/joinForm"/>">회원가입</a>
+                    </li>
+                </ul>
+            </c:when>
+            <c:otherwise>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/board/writeForm"/>">글쓰기</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/user/userForm"/>">회원정보</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<c:url value="/user/logout"/>">로그아웃</a>
+                    </li>
+                </ul>
+            </c:otherwise>
+        </c:choose>
     </div>
 </nav>
 <br>
