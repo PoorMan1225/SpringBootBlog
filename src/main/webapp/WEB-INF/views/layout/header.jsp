@@ -1,6 +1,10 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; ISO-8859-1" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%--스프링 시큐리티 인증 태그 라이브러리. --%>
+<sec:authorize access="isAuthenticated()">
+   <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
 <html lang="en">
 <head>
     <title>RJH 블로그</title>
@@ -23,13 +27,14 @@
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <c:choose>
-            <c:when test="${empty sessionScope.principal}">
+            <%-- 세션이 비었는지 확인--%>
+            <c:when test="${empty principal}">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/user/loginForm"/>">로그인</a>
+                        <a class="nav-link" href="<c:url value="/auth/loginForm"/>">로그인</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/user/joinForm"/>">회원가입</a>
+                        <a class="nav-link" href="<c:url value="/auth/joinForm"/>">회원가입</a>
                     </li>
                 </ul>
             </c:when>
@@ -42,7 +47,7 @@
                         <a class="nav-link" href="<c:url value="/user/userForm"/>">회원정보</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<c:url value="/user/logout"/>">로그아웃</a>
+                        <a class="nav-link" href="<c:url value="/logout"/>">로그아웃</a>
                     </li>
                 </ul>
             </c:otherwise>

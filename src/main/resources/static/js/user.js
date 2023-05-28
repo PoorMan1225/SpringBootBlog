@@ -14,11 +14,6 @@ let index = {
                 this.save();
             }
         );
-
-        $("#btn-login").on("click", () => {
-                this.login();
-            }
-        );
     },
 
     save: function () {
@@ -33,38 +28,16 @@ let index = {
         // error 처리 에도 용이하고, 라이브러리를 추가 안해도 되면서 보안에도 취약하다.
         $.ajax({
             type:"POST",
-            url:"/blog/api/user",
+            url:"/auth/joinProc",
             data: JSON.stringify(data), // http body 데이터
             contentType: "application/json; charset=utf-8", // body 데이터가 어떤 타입인지(MIME)
             // dataType:"json" // 요청을 서버로 해서 응답이 왔을때. (DEFAULT 문자열) 생긴게 JSON 데이터라면 javascript 객체로 바꿔준다.
         }).done((resp) => {
             alert("회원가입이 완료되었습니다.");
-            location.href = "/blog";
+            location.href = "/";
         }).fail((error) => {
             alert(JSON.stringify(error));
         }); // ajax 통신을 이용해서 3개의 데이터를 json 으로 변경하여 insert 요청
     },
-
-    login: function () {
-        const data = {
-            username: $("#username").val(),
-            password: $("#password").val()
-        };
-
-        // js 의 fetch 함수를 사용하는 것이 여러모로 더 낫다.
-        // error 처리 에도 용이하고, 라이브러리를 추가 안해도 되면서 보안에도 취약하다.
-        $.ajax({
-            type:"POST",
-            url:"/blog/api/user/login",
-            data: JSON.stringify(data), // http body 데이터
-            contentType: "application/json; charset=utf-8", // body 데이터가 어떤 타입인지(MIME)
-            // dataType:"json" // 요청을 서버로 해서 응답이 왔을때. (DEFAULT 문자열) 생긴게 JSON 데이터라면 javascript 객체로 바꿔준다.
-        }).done((resp) => {
-            alert("로그인이 완료되었습니다.");
-            location.href = "/blog";
-        }).fail((error) => {
-            alert(JSON.stringify(error));
-        }); // ajax 통신을 이용해서 3개의 데이터를 json 으로 변경하여 insert 요청
-    }
 }
 index.init()
